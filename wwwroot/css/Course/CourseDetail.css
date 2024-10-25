@@ -41,14 +41,14 @@ body {
     margin-bottom: 15px;
 }
 
-.feedback-section .stars i {
-    color: var(--star-default-color);
-    cursor: pointer;
-}
+    .feedback-section .stars i {
+        color: var(--star-default-color);
+        cursor: pointer;
+    }
 
-.feedback-section .stars i.selected {
-    color: var(--star-color);
-}
+        .feedback-section .stars i.selected {
+            color: var(--star-color);
+        }
 
 .header {
     background-color: var(--primary-color);
@@ -63,9 +63,9 @@ body {
     color: var(--star-default-color);
 }
 
-.stars i.selected {
-    color: var(--star-color);
-}
+    .stars i.selected {
+        color: var(--star-color);
+    }
 
 .pagination .page-item.active .page-link {
     background-color: var(--star-color);
@@ -76,10 +76,10 @@ body {
     color: var(--star-default-color);
 }
 
-.pagination .page-item.active .page-link,
-.pagination .page-item .page-link:hover {
-    color: var(--white-color);
-}
+    .pagination .page-item.active .page-link,
+    .pagination .page-item .page-link:hover {
+        color: var(--white-color);
+    }
 
 a {
     text-decoration: none;
@@ -99,15 +99,10 @@ a {
     left: auto;
 }
 
-.price  {
+.price {
     color: var(--white-color);
 }
-.btn{
+
+.btn {
     font-size: large;
 }
-
-
-
-
-
-

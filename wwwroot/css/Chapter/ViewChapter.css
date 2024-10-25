@@ -1,12 +1,14 @@
 /* Gradient Header */
 .gradient-header {
-    background: linear-gradient(to right,var(--main-color),
-        var(--secondary-color));
+    background: linear-gradient(to right,var(--main-color), var(--secondary-color));
     font-weight: bold;
 }
 
 /* Sidebar buttons customization */
-
+body {
+    padding-top: 70px !important;
+    background-color: var(--white-corlor) !important;
+}
 
 /* Ensure the card has full height */
 .card {

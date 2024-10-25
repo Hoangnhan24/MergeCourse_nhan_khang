@@ -1,8 +1,8 @@
 body {
-    font-family: 'Outfit', sans-serif;
-    background-color: var(--light-blue-color);
-    padding-add : 0;
+    padding-top: 70px !important;
+    background-color: var(--white-corlor) !important;
 }
+
 
 .sidebar {
     background-color: var(--white-color);
@@ -34,17 +34,18 @@ body {
     border: none;
 }
 
-.btn-success:hover {
-    background-color:var(--green-color);
-}
+    .btn-success:hover {
+        background-color: var(--green-color);
+    }
 
 
-.img-fluid{
-    width: 150px; 
-    height: 150px; 
-    object-fit: cover; 
+.img-fluid {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
     border-radius: 10px;
 }
-#editor-container{
+
+#editor-container {
     height: 150px;
 }

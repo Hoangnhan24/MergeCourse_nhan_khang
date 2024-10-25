@@ -1,6 +1,8 @@
 ﻿@{
 }
 @model List<Chapter>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,30 +13,44 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Base CSS (Common Styles) -->
-    <link rel="stylesheet" href="~/css/Chapter/ViewChapter.css">
     <!-- Page-Specific Styles -->
     <link href="~/css/baseChapter.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/HomePage/landing_page.css">
+    <link rel="stylesheet" href="~/css/Chapter/ViewChapter.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <body>
-    @await Html.PartialAsync("~/Views/Shared/Instructor/Header/_Header.cshtml")
+    @{
 
+        string userRole = Context.Request.Cookies["user_role"];
+    }
+
+    @if (userRole == "2")
+    {
+        @await Html.PartialAsync("~/Views/Shared/Instructor/Header/_Header.cshtml")
+    }
+    else if (userRole == "1")
+    {
+        @await Html.PartialAsync("~/Views/Shared/Admin/Header/_Header.cshtml")
+
+    }
     <div class="row">
         <!-- Sidebar -->
         @{
 
-            string userRole = Context.Request.Cookies["user_role"];
+            
 
 
             string courseId = Context.Request.Cookies["CourseId"];
 
 
             <div class="col-md-3 bg-SECONDARY sidebar p-3">
-                <a class="btn btn-primary w-100 mb-3" href="@Url.Action("ChapterManagement", "Chapter", new { courseId = courseId })">Add Chapter</a>
-                <a class="btn btn-outline-secondary w-100 mb-3" href="@Url.Action("DeleteChapter", "Chapter",new { courseId = courseId })">Delete Chapter</a>
-                <a class="btn btn-outline-secondary w-100" href="@Url.Action("ViewChapters", "Chapter", new { courseId = courseId })">View Chapter</a>
+                <a class="btn btn-primary w-100 mb-3" href="@Url.Action("ChapterManagement", "Chapter")">Add Chapter</a>
+                <a class="btn btn-outline-secondary w-100 mb-3" href="@Url.Action("DeleteChapter", "Chapter")">Delete Chapter</a>
+                <a class="btn btn-outline-secondary w-100" href="@Url.Action("ViewChapters", "Chapter")">View Chapter</a>
             </div>
         }
 
@@ -48,18 +64,16 @@
                     <!-- List of chapters with edit and manage lessons buttons -->
                     @foreach (var c in Model)
                     {
-                        <input type="hidden" name="CourseId" value="@ViewBag.CourseId" />
-
                         <div class="mb-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5>@c.ChapterName</h5>
-                                <a class="btn btn-outline-primary btn-sm" href="/Chapter/EditChapter/@c.ChapterId">Edit</a>
+                                <!-- Thêm thuộc tính data-chapterid vào nút "Edit" -->
+                                <a class="btn btn-outline-primary btn-sm edit-chapter" href="javascript:void(0);" data-chapterid="@c.ChapterId">Edit</a>
                             </div>
                             <p>@c.ChapterDescription</p>
                             <a class="btn btn-primary" href="../html/ManageLesson.html">Manage Lessons</a>
                         </div>
                     }
-
                 </div>
             </div>
         </div>
@@ -69,6 +83,22 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Hàm lưu cookie
+        function setCookie(name, value) {
+            document.cookie = `${name}=${value}; path=/`;
+        }
+
+        // Lấy ChapterId từ nút "Edit" và lưu vào cookie, sau đó điều hướng
+        document.querySelectorAll('.edit-chapter').forEach(button => {
+            button.addEventListener('click', function () {
+                var chapterId = this.getAttribute('data-chapterid');  // Lấy ChapterId từ thuộc tính data-chapterid
+                setCookie('ChapterId', chapterId);  // Lưu ChapterId vào cookie
+                window.location.href = "/Chapter/EditChapter";  // Điều hướng tới action EditChapter
+            });
+        });
+    </script>
 </body>
 
 </html>

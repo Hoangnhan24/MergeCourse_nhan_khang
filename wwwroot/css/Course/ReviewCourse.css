@@ -55,10 +55,9 @@ a {
     justify-content: center;
     gap: 30px;
     margin: 80px;
-
 }
 
-.approval-buttons .btn{
-    font-size: 1.5rem;
-    padding: 15px 30px;
-}
+    .approval-buttons .btn {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+    }
